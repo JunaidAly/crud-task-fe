@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrl: './task-screen.component.scss'
 })
 export class TaskScreenComponent {
-
+  Tasks: any []=[];
+  TaskLists: any []=[];
 }
