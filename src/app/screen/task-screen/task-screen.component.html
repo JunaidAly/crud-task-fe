@@ -12,7 +12,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <ol  *ngFor="let item of Tasks" class="list-group list-group-numbered">
+                        <ol  *ngFor="let item of TaskLists" class="list-group list-group-numbered">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                               <div class="ms-2 me-auto">
                                 {{item.title}}
@@ -35,10 +35,13 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <ol *ngFor="let item of TaskLists" class="list-group list-group-numbered">
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <ol *ngFor="let task of Tasks" class="list-group list-group-numbered">
+                        <li
+                        [class.marked-complete]="task.completed==true" 
+                        style="cursor: pointer;" 
+                        (click)="markUpdate(task)" class="list-group-item d-flex justify-content-between align-items-start">
                           <div class="ms-2 me-auto">
-                            {{item.title}}
+                            {{task.title}}
                            </div>
                           <span class="badge text-bg-danger rounded-pill">X</span>
                         </li>
