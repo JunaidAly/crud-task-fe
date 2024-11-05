@@ -17,7 +17,7 @@ export class TaskService {
   }
   //Create TaskList
   //http://localhost:3000/tasklists
-  CreateTaskLists(title:string){
+  CreateTaskLists(title:string): Observable<TasklistModel>{
     let data = {
       'title': title
     }
@@ -30,18 +30,18 @@ export class TaskService {
   }
   //create a task inside a particular tasklist object
   //http://localhost:3000/tasklists/:id/tasks
-  CreateATaskInsideTaskList(tasklistId:string, title:string){
-    return this.apiConfigService.post(`tasklists/${tasklistId}/tasks`,{title});
+  CreateATaskInsideTaskList(tasklistId:string, title:string):Observable<TaskModel>{
+    return this.apiConfigService.createTask(`tasklists/${tasklistId}/tasks`,{title});
   }
  //delete a task list
   //http://localhost:3000/tasklists/:id
-  DeleteTaskList(tasklistId:string){
-    return this.apiConfigService.delete(`tasklists/${tasklistId}`);
+  DeleteTaskList(tasklistId:string):Observable<TasklistModel[]>{
+    return this.apiConfigService.deleteTaskList(`tasklists/${tasklistId}`);
   }
   //delete a task inside a particular tasklist
   //http://localhost:3000/tasklists/:id/tasks/:tasklistId
-  DeleteTaskInsideTaskList(tasklistId:string, taskId:string){
-    return this.apiConfigService.delete(`tasklists/${tasklistId}/tasks/${taskId}`);
+  DeleteTaskInsideTaskList(tasklistId:string, taskId:string):Observable<TaskModel[]>{
+    return this.apiConfigService.deleteTask(`tasklists/${tasklistId}/tasks/${taskId}`);
   }
   //update a status of task weather its completed or not
   //http://localhost:3000/tasklists/:id/tasks/:tasklistId

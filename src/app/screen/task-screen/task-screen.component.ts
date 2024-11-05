@@ -44,4 +44,27 @@ markUpdate(task: TaskModel) {
     }
   )
 }
+deleteTask(task: TaskModel) {
+  console.log(task);
+  this.taskService.DeleteTaskInsideTaskList(task._taskListId, task._id)
+    .subscribe((tasks: TaskModel[]) => this.Tasks =
+  this.Tasks.filter((taskObject: TaskModel) => taskObject._id !== task._id));
+  
 }
+
+DeleteTaskList(taskList: TasklistModel){
+  console.log(taskList);
+  this.taskService.DeleteTaskList(taskList._id)
+  .subscribe((taskLists: TasklistModel[]) => this.TaskLists =
+  this.TaskLists.filter((taskListObject: TasklistModel) => taskListObject._id !== taskList._id));
+}
+newTask(){
+  if(this.TaskListId){
+    this.route.navigate(['./new-task'],{relativeTo:this.activatedRoute});
+  }else{
+      alert('Please select a task list to add a new task');
+      return;
+    }
+  }
+}
+

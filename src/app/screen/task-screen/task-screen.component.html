@@ -1,25 +1,28 @@
 <div class="container mt-4">
     <h2 class="bg-warning p-2 fw-bold text-center">Task Manager App</h2>
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4 col-sm-12">
                 <div class="row">
                     <div class="col-6">
                         <h3 class="fw-bold float-start">Task Lists</h3>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-success float-end">New Task Lists</button>
+                        <button type="button" class="btn btn-success float-end"
+                        routerLink="/new-tasklist"
+                        >New Task Lists</button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <ol  *ngFor="let item of TaskLists" class="list-group list-group-numbered">
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                              <div class="ms-2 me-auto">
-                                {{item.title}}
-                              </div>
-                              <span class="badge text-bg-danger rounded-pill">X</span>
-                            </li>
-                          </ol>
+                        <div class="list-group ">
+                            <a 
+                            [routerLink]="['/task-lists', item._id]"
+                            routerLinkActive="active"
+                            *ngFor="let item of TaskLists" class="list-group-item list-group-item-action " aria-current="true">
+                                {{item.title}}   
+                                <span (click)="DeleteTaskList(item)" class="badge text-bg-danger rounded-pill">X</span>
+                            </a>
+                          </div>
                     </div>
                 </div>
         </div>
@@ -30,12 +33,14 @@
                     <h3 class="fw-bold float-start">Linked Tasks</h3>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="btn btn-success float-end">New Tasks</button>
+                    <button type="button" class="btn btn-success float-end"
+                    (click)="newTask()"
+                    >New Tasks</button>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12">
-                    <ol *ngFor="let task of Tasks" class="list-group list-group-numbered">
+                <div class="col-md-12 col-sm-12">
+                    <ul *ngFor="let task of Tasks" class="list-group list-group-numbered">
                         <li
                         [class.marked-complete]="task.completed==true" 
                         style="cursor: pointer;" 
@@ -43,9 +48,9 @@
                           <div class="ms-2 me-auto">
                             {{task.title}}
                            </div>
-                          <span class="badge text-bg-danger rounded-pill">X</span>
+                          <span (click)="deleteTask(task)" class="badge text-bg-danger rounded-pill">X</span>
                         </li>
-                      </ol>
+                      </ul>
                 </div>
             </div>
     </div>
